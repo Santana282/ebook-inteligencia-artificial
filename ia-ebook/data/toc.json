@@ -1,0 +1,37 @@
+[
+    {
+        "id": "01-fundamentos",
+        "title": "Parte I. Fundamentos de IA",
+        "file": "chapters/01-fundamentos.html"
+    },
+    {
+        "id": "02-ia-texto",
+        "title": "Parte II. Inteligencia Artificial de Texto",
+        "file": "chapters/02-ia-texto.html"
+    },
+    {
+        "id": "03-modelos-lenguaje",
+        "title": "Parte III. Modelos de Lenguaje (LLMs)",
+        "file": "chapters/03-modelos-lenguaje.html"
+    },
+    {
+        "id": "04-deep-learning",
+        "title": "Parte IV. Aprendizaje Profundo",
+        "file": "chapters/04-deep-learning.html"
+    },
+    {
+        "id": "05-difusion",
+        "title": "Parte V. Generación de Imágenes",
+        "file": "chapters/05-difusion.html"
+    },
+    {
+        "id": "06-multimodal-agentes",
+        "title": "Parte VI. IA Multimodal y Agentes",
+        "file": "chapters/06-multimodal-agentes.html"
+    },
+    {
+        "id": "07-etica-futuro",
+        "title": "Parte VII. Ética y Futuro de la IA",
+        "file": "chapters/07-etica-futuro.html"
+    }
+]

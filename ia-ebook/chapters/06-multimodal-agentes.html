@@ -1,0 +1,113 @@
+<article class="chapter-content">
+    <header>
+        <h1>IA Multimodal y Agentes Autónomos</h1>
+        <p class="chapter-objective"><strong>Objetivo de aprendizaje:</strong> Comprender la evolución hacia modelos multimodales (audio, video, texto simultáneo) y el paso de IAs que solo "responden" a IAs que "actúan" mediante aprendizaje por refuerzo.</p>
+    </header>
+
+    <section>
+        <h2>6.1 La Era Multimodal</h2>
+        <p>Hasta hace poco, los modelos de IA estaban aislados por modalidad: los LLMs procesaban texto y los modelos de difusión generaban imágenes. La <strong>IA Multimodal</strong> rompe esta barrera al entrenar modelos nativamente con múltiples tipos de datos (texto, audio, imágenes y video) al mismo tiempo.</p>
+        <p>Un modelo multimodal verdadero (como GPT-4o o Gemini) no traduce el audio a texto para entenderlo; procesa las ondas de sonido directamente, lo que le permite captar emociones, tono de voz y ruidos de fondo, o analizar un video cuadro por cuadro para entender la física de una escena.</p>
+        
+        <!-- Diagrama SVG: Multimodalidad -->
+        <figure class="diagram-container" style="margin: 2rem 0; text-align: center; padding: 1rem; background: var(--bg-sidebar); border-radius: 8px; border: 1px solid var(--border-color);">
+            <svg viewBox="0 0 600 200" width="100%" height="auto" role="img" aria-label="Diagrama de IA multimodal">
+                <style>
+                    .box {
+                        fill: var(--bg-app);
+                        stroke: var(--border-color);
+                        stroke-width: 2;
+                    }
+
+                    .txt {
+                        fill: var(--text-main);
+                        font-family: var(--font-ui);
+                        font-size: 14px;
+                        font-weight: bold;
+                        text-anchor: middle;
+                        dominant-baseline: middle;
+                    }
+
+                    @keyframes arrowFlow {
+                        from { stroke-dashoffset: 20; }
+                        to   { stroke-dashoffset: 0; }
+                    }
+
+                    .arrow {
+                        stroke: var(--accent-color);
+                        stroke-width: 2;
+                        stroke-dasharray: 5;
+                        animation: arrowFlow 0.8s linear infinite;
+                    }
+
+                    @keyframes modelGlow {
+                        0%, 100% {
+                            fill: rgba(139, 92, 246, 0.08);
+                            stroke-width: 2;
+                        }
+                        50% {
+                            fill: rgba(139, 92, 246, 0.2);
+                            stroke-width: 3;
+                        }
+                    }
+
+                    .model-box {
+                        stroke: #8b5cf6;
+                        fill: rgba(139, 92, 246, 0.08);
+                        animation: modelGlow 2s infinite ease-in-out;
+                        filter: drop-shadow(0 0 6px rgba(139, 92, 246, 0.6));
+                    }
+                </style>
+                
+                <!-- Inputs -->
+                <rect x="50" y="20" width="100" height="40" class="box" rx="6" ry="6" />
+                <text x="100" y="40" class="txt">Texto</text>
+
+                <rect x="50" y="80" width="100" height="40" class="box" rx="6" ry="6" />
+                <text x="100" y="100" class="txt">Audio</text>
+
+                <rect x="50" y="140" width="100" height="40" class="box" rx="6" ry="6" />
+                <text x="100" y="160" class="txt">Imagen</text>
+
+                <!-- Flechas de entrada -->
+                <line x1="150" y1="40" x2="250" y2="90" class="arrow" />
+                <line x1="150" y1="100" x2="250" y2="100" class="arrow" />
+                <line x1="150" y1="160" x2="250" y2="110" class="arrow" />
+
+                <!-- Modelo Multimodal -->
+                <rect x="260" y="50" width="140" height="100" class="model-box" rx="8" ry="8" />
+                <text x="330" y="95" class="txt">Modelo</text>
+                <text x="330" y="118" class="txt" style="font-size: 12px; fill: var(--text-muted);">Multimodal Nativo</text>
+
+                <!-- Flechas de salida -->
+                <line x1="410" y1="100" x2="480" y2="70" class="arrow" />
+                <line x1="410" y1="100" x2="480" y2="130" class="arrow" />
+
+                <!-- Outputs -->
+                <rect x="490" y="50" width="80" height="40" class="box" style="stroke: #10b981; fill: var(--bg-app);" />
+                <text x="530" y="70" class="txt">Acción</text>
+
+                <rect x="490" y="110" width="80" height="40" class="box" style="stroke: #10b981; fill: var(--bg-app);" />
+                <text x="530" y="130" class="txt">Respuesta</text>
+            </svg>
+        </figure>
+    </section>
+
+    <section>
+        <h2>6.2 Audio y Video Generativo</h2>
+        <p>Más allá de las imágenes estáticas, las arquitecturas de difusión y los transformers se han adaptado al espacio temporal:</p>
+        <ul>
+            <li><strong>Video (ej. Sora, Runway):</strong> Operan generando parches espacio-temporales. El modelo no solo aprende cómo se ve un objeto, sino cómo se comporta en el mundo físico (gravedad, colisiones, perspectiva al mover la cámara).</li>
+            <li><strong>Audio (ej. ElevenLabs, Suno):</strong> Utilizan modelos acústicos para clonar voces con entonación hiperrealista o generar música completa (instrumentos y voces) a partir de letras descriptivas.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>6.3 Agentes Autónomos y Aprendizaje por Refuerzo</h2>
+        <p>Un LLM estándar es pasivo: espera una pregunta y da una respuesta. El siguiente paso evolutivo son los <strong>Agentes Autónomos</strong>. Un agente puede planificar pasos, usar herramientas externas (navegadores web, calculadoras, APIs) y corregir sus propios errores para lograr un objetivo.</p>
+        <p>Para tareas complejas (como jugar ajedrez, videojuegos o controlar brazos robóticos), se utiliza el <strong>Aprendizaje por Refuerzo (Reinforcement Learning - RL)</strong>. En RL, el modelo (agente) interactúa con un entorno y recibe "recompensas" o "castigos" según sus acciones. El famoso AlphaGo de DeepMind, que derrotó al campeón mundial de Go, utilizaba esta técnica para descubrir estrategias nunca antes vistas por humanos.</p>
+    </section>
+
+    <hr style="margin: 3rem 0; border: 1px solid var(--border-color);">
+    <div id="quiz-06-multimodal-agentes"></div>
+</article>
