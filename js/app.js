@@ -25,6 +25,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const savedId = localStorage.getItem('currentChapter');
     const targetIndex = state.chapters.findIndex(ch => ch.id === savedId);
     state.currentIndex = targetIndex !== -1 ? targetIndex : 0;
+    const btnIndice = document.querySelector('#btn-indice'); 
+    const sidebar = document.querySelector('.sidebar');
+    
+    if (btnIndice && sidebar) {
+    btnIndice.addEventListener('click', () => {
+        sidebar.classList.toggle('show-sidebar');
+    });
+    }
     
     loadChapter(state.currentIndex);
 });
