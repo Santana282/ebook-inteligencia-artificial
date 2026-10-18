@@ -1,0 +1,96 @@
+<article class="chapter-content">
+    <header>
+        <h1>Inteligencia Artificial de Texto y NLP</h1>
+        <p class="chapter-objective"><strong>Objetivo de aprendizaje:</strong> Comprender cómo los sistemas computacionales procesan el lenguaje natural mediante la tokenización y la representación vectorial (embeddings) antes del auge de los LLM masivos.</p>
+    </header>
+
+    <section>
+        <h2>2.1 El Procesamiento del Lenguaje Natural (NLP)</h2>
+        <p>El Procesamiento del Lenguaje Natural (NLP, por sus siglas en inglés) es un subcampo interdisciplinario de la lingüística, la informática y la Inteligencia Artificial que se ocupa de las interacciones entre las computadoras y el lenguaje humano. El desafío fundamental del NLP es que el lenguaje humano es inherentemente ambiguo, contextual e irregular, mientras que los procesadores tradicionales operan bajo lógica booleana estricta.</p>
+    </section>
+
+    <section>
+        <h2>2.2 Tokenización: El alfabeto de las máquinas</h2>
+        <p>Los algoritmos de Machine Learning no pueden procesar texto en crudo. El primer paso lógico es la <strong>Tokenización</strong>, el proceso de dividir una cadena de texto en unidades discretas llamadas <em>tokens</em>.</p>
+        <p>Históricamente, los tokens solían ser palabras completas separadas por espacios. Sin embargo, los sistemas modernos (como los que veremos en arquitecturas Transformer) utilizan la tokenización por subpalabras (<em>subword tokenization</em>, como BPE o WordPiece). Esto permite manejar vocabularios infinitos y palabras desconocidas al dividirlas en sus raíces léxicas y morfemas.</p>
+    </section>
+
+    <section>
+        <h2>2.3 Embeddings: Representación Vectorial en el Espacio</h2>
+        <p>Una vez que tenemos tokens, necesitamos convertirlos a números. Un <strong>Embedding</strong> es una representación matemática donde las palabras se proyectan como vectores de números reales en un espacio multidimensional. Su característica fundamental es geométrica: las palabras con significados o contextos similares se ubican muy cerca unas de otras en este espacio espacial.</p>
+
+        <!-- Diagrama SVG: El Espacio Latente de Embeddings -->
+        <figure class="diagram-container" style="margin: 2rem 0; text-align: center;">
+            <svg viewBox="0 0 600 300" width="100%" height="auto" role="img" aria-labelledby="svg-title svg-desc">
+                <title id="svg-title">Espacio Vectorial de Embeddings</title>
+                <desc id="svg-desc">Diagrama que muestra cómo palabras similares como Perro y Gato se agrupan, separadas de conceptos como Coche y Bicicleta.</desc>
+                
+                <!-- Estilos SVG adaptables al modo oscuro -->
+                <style>
+                    .axis { stroke: var(--border-color); stroke-width: 2; }
+                    .node { fill: var(--accent-color); r: 6; }
+                    .label { fill: var(--text-main); font-family: var(--font-ui); font-size: 14px; font-weight: bold; }
+                    .connection { stroke: var(--text-muted); stroke-width: 1.5; stroke-dasharray: 4; fill: none; }
+                </style>
+
+                <!-- Ejes -->
+                <line x1="50" y1="250" x2="550" y2="250" class="axis" />
+                <line x1="50" y1="250" x2="50" y2="50" class="axis" />
+                <text x="560" y="255" class="label" style="font-size: 12px; fill: var(--text-muted)">Dimensión 1 (Concepto)</text>
+                <text x="50" y="40" class="label" style="font-size: 12px; fill: var(--text-muted)">Dimensión 2 (Contexto)</text>
+
+                <!-- Cluster 1: Animales -->
+                <circle cx="150" cy="100" class="node" />
+                <text x="135" y="90" class="label">Gato</text>
+                
+                <circle cx="180" cy="130" class="node" />
+                <text x="185" y="135" class="label">Perro</text>
+
+                <!-- Cluster 2: Vehículos -->
+                <circle cx="450" cy="200" class="node" style="fill: #2ea043;" />
+                <text x="440" y="190" class="label">Coche</text>
+                
+                <circle cx="400" cy="220" class="node" style="fill: #2ea043;" />
+                <text x="410" y="225" class="label">Bicicleta</text>
+
+                <!-- Distancia semántica -->
+                <path d="M 165 115 Q 300 50 425 210" class="connection" />
+                <text x="260" y="120" class="label" style="font-size: 12px; fill: var(--text-muted)">Alta distancia (Baja similitud)</text>
+            </svg>
+            <figcaption style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">
+                Fig 1. Proyección 2D simplificada de un espacio de Embeddings. Conceptos semánticamente cercanos forman clústeres matemáticos.
+            </figcaption>
+        </figure>
+    </section>
+
+    <section class="code-lab">
+        <h3>Laboratorio: Tokenización y Vectores en Python</h3>
+        <p>A continuación, observamos cómo una biblioteca estándar de procesamiento de lenguaje natural convierte texto en vectores densos. Este bloque requiere la librería <code>spacy</code>.</p>
+        
+        <div class="code-block" style="background:#1e1e1e; color:#d4d4d4; padding:15px; border-radius:5px; font-family: monospace; overflow-x: auto;">
+<pre><code><span style="color:#569cd6;">import</span> spacy
+<span style="color:#569cd6;">import</span> numpy <span style="color:#569cd6;">as</span> np
+
+<span style="color:#6a9955;"># Cargar un modelo de lenguaje intermedio en español</span>
+nlp = spacy.load(<span style="color:#ce9178;">"es_core_news_md"</span>)
+
+<span style="color:#6a9955;"># Analizar dos palabras semánticamente relacionadas</span>
+token1 = nlp(<span style="color:#ce9178;">"Gato"</span>)[0]
+token2 = nlp(<span style="color:#ce9178;">"Perro"</span>)[0]
+token3 = nlp(<span style="color:#ce9178;">"Coche"</span>)[0]
+
+<span style="color:#6a9955;"># Calcular similitud del coseno (0 a 1)</span>
+print(<span style="color:#ce9178;">f"Similitud Gato-Perro: {token1.similarity(token2):.3f}"</span>) <span style="color:#6a9955;"># Salida alta (~0.85)</span>
+print(<span style="color:#ce9178;">f"Similitud Gato-Coche: {token1.similarity(token3):.3f}"</span>) <span style="color:#6a9955;"># Salida baja (~0.12)</span>
+
+<span style="color:#6a9955;"># Inspeccionar las primeras 5 dimensiones matemáticas del Embedding de 'Gato'</span>
+print(token1.vector[:5]) 
+<span style="color:#6a9955;"># Ejemplo de salida: [ 0.12, -0.45, 0.89, -0.01, 0.33 ]</span>
+</code></pre>
+        </div>
+    </section>
+
+    <!-- Contenedor del cuestionario inyectado por JS -->
+    <hr style="margin: 3rem 0; border: 1px solid var(--border-color);">
+    <div id="quiz-02-ia-texto"></div>
+</article>
